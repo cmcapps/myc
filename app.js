@@ -1,6 +1,6 @@
-import {CONFIG} from './config.js';
-import {MycApi} from './api.js';
-import {PEOPLE,CATEGORIES,STORES,TABLES,emptyState,cents,balance,today,monthNow} from './domain.js';
+import {CONFIG} from './config.js?v=8a1736d6d9a8';
+import {MycApi} from './api.js?v=8a1736d6d9a8';
+import {PEOPLE,CATEGORIES,STORES,TABLES,emptyState,cents,balance,today,monthNow} from './domain.js?v=8a1736d6d9a8';
 const api=new MycApi();
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
