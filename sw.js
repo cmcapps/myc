@@ -1,4 +1,4 @@
-const CACHE='myc-shell-e9932c92a7ac';
+const CACHE='myc-shell-dacbc1288e3f';
 const ROOT=new URL('./',self.location.href);
 const FILES=['./','./index.html','./styles.css','./app.js','./api.js','./domain.js','./config.js','./manifest.webmanifest',...['icon-192.png','icon-512.png','apple-touch-icon.png','gastos.png','tareas.png','compra.png','mensajes.png','carlos.png','maria.png'].map(f=>'./assets/'+f)];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES.map(f=>new URL(f,ROOT).href)))));
