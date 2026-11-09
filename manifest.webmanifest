@@ -1,0 +1,6 @@
+{
+  "id": "./", "name": "MYC · Nuestro hogar", "short_name": "MYC", "lang": "es", "description": "El hogar de María y Carlos, un poquito más organizado.",
+  "start_url": "./", "scope": "./", "display": "standalone", "background_color": "#f7f6f2", "theme_color": "#214f4b",
+  "icons": [{"src":"./assets/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},{"src":"./assets/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"}],
+  "shortcuts": [{"name":"Añadir gasto","url":"./?section=expenses"},{"name":"Lista de la compra","url":"./?section=shopping"}]
+}
