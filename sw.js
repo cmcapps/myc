@@ -1,6 +1,6 @@
-const CACHE='myc-shell-adb34e69e64b';
+const CACHE='myc-shell-7bd8f4bf9513';
 const ROOT=new URL('./',self.location.href);
-const FILES=['./','./index.html','./styles.css','./app.js','./api.js','./domain.js','./config.js','./manifest.webmanifest',...['icon-192.png','icon-512.png','apple-touch-icon.png','gastos.png','tareas.png','compra.png','mensajes.png','carlos.png','maria.png'].map(f=>'./assets/'+f)].map(f=>/\.(js|css)$/.test(f)?f+'?v=adb34e69e64b':f);
+const FILES=['./','./index.html','./styles.css','./app.js','./api.js','./domain.js','./config.js','./manifest.webmanifest',...['icon-192.png','icon-512.png','apple-touch-icon.png','gastos.png','tareas.png','compra.png','mensajes.png','carlos.png','maria.png'].map(f=>'./assets/'+f)].map(f=>/\.(js|css)$/.test(f)?f+'?v=7bd8f4bf9513':f);
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES.map(f=>new URL(f,ROOT).href)))));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('myc-shell-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('message',e=>{if(e.data==='SKIP_WAITING')self.skipWaiting();});
