@@ -19,6 +19,13 @@ export function validTime(value, optional = false) {
   if (typeof value !== 'string' || !/^([01]\d|2[0-3]):[0-5]\d$/.test(value)) fail('Hora no válida.');
   return value;
 }
+// Avisos: lista de minutos de antelación ('1440' = 1 día, '60' = 1 h, '15' = 15 min, '0' = a la hora). Vacía = sin avisos.
+export const REMINDERS = ['1440', '60', '15', '0'];
+export function reminders(value) {
+  const list = Array.isArray(value) ? value : value === undefined || value === null || value === '' ? [] : [value];
+  if (list.length > 4) fail('Avisos no válidos.');
+  return REMINDERS.filter(r => list.map(v => oneOf(String(v), REMINDERS)).includes(r));
+}
 export function cents(value) {
   const v = String(value).trim().replace(',', '.');
   if (!/^\d{1,7}(\.\d{1,2})?$/.test(v)) fail('Introduce un importe positivo con un máximo de dos decimales.');
@@ -36,7 +43,7 @@ export function validateRecord(table, input) {
   if (!TABLES.includes(table) || !input || typeof input !== 'object') fail('Registro no válido.');
   switch (table) {
     case 'expenses': { const purpose=oneOf(input.purpose,['household','Carlos','María']); return {purpose, store:oneOf(input.store,STORES), title:text(input.title), amount:integer(input.amount,1,100000000), date:validDate(input.date), paidBy:oneOf(input.paidBy,PEOPLE), category:oneOf(input.category,CATEGORIES), carlosPercent:purpose==='Carlos'?100:purpose==='María'?0:integer(input.carlosPercent,0,100), notes:text(input.notes || '',1000,true)}; }
-    case 'tasks': return {title:text(input.title), assignedTo:oneOf(input.assignedTo,[...PEOPLE,'Ambos']), due:validDate(input.due || '',true), time:input.due?validTime(input.time || '',true):'', recurrence:oneOf(input.recurrence,['none','daily','weekly','monthly']), done:!!input.done, notes:text(input.notes || '',1000,true)};
+    case 'tasks': return {title:text(input.title), assignedTo:oneOf(input.assignedTo,[...PEOPLE,'Ambos']), due:validDate(input.due || '',true), time:input.due?validTime(input.time || '',true):'', remind:reminders(input.remind), recurrence:oneOf(input.recurrence,['none','daily','weekly','monthly']), done:!!input.done, notes:text(input.notes || '',1000,true)};
     case 'shopping': return {title:text(input.title,100), quantity:text(input.quantity || '1',40), category:oneOf(input.category,['Alimentación','Limpieza','Otros']), checked:!!input.checked};
     case 'messages': return {title:text(input.title,120), body:text(input.body,2000), to:oneOf(input.to,[...PEOPLE,'Ambos']), resolved:!!input.resolved};
     case 'settlements': return {from:oneOf(input.from,PEOPLE), amount:integer(input.amount,1,100000000), date:validDate(input.date), notes:text(input.notes || '',1000,true)};
