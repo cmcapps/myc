@@ -59,7 +59,7 @@
 .cat-option:has(input:focus-visible){outline:2px solid #cee0c5;outline-offset:1px}
 
 /* ---- Hora en recordatorios ---- */
-.time-hint{display:flex;align-items:center;gap:6px;margin:30px 0 17px}
+.time-hint{display:flex;align-items:center;gap:6px;margin:-6px 0 17px}
 .time-hint .icon{width:15px;height:15px;min-width:15px}
 
 /* ---- Reautenticación sin perder lo que estabas haciendo ---- */
@@ -76,3 +76,14 @@
 .push-state.on{background:var(--green-light)}
 .push-state.on strong{color:var(--green)}
 .push-state.denied,.push-state.unsupported{background:#fbeef0}
+
+.remind-picker{border:0;padding:0;margin:0 0 17px}
+.remind-picker legend{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#78896f;margin-bottom:8px;padding:0}
+.remind-picker legend .icon{width:14px;height:14px}
+.remind-picker legend small{font-weight:400;color:#a1aa96}
+.remind-options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.remind-option{position:relative;display:flex;align-items:center;justify-content:center;min-height:42px;padding:8px;border:1px solid #dfe5d9;border-radius:11px;background:#fbfcf9;font-size:12px;color:#55665a;cursor:pointer}
+.remind-option input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.remind-option:has(input:checked){border-color:var(--green);background:var(--green-light);color:var(--green);font-weight:600}
+.remind-option:has(input:checked) span::before{content:'✓ '}
+.remind-option:has(input:focus-visible){outline:2px solid #cee0c5;outline-offset:1px}
