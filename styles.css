@@ -32,3 +32,47 @@
   .shortcut p{font-size:11px;line-height:1.5;max-width:none;margin-top:5px;overflow-wrap:anywhere}
   .shortcut .round-arrow{display:none}
 }
+
+/* ---- Iconos de categoría ---- */
+.cat-icon{--c:#6f7d72;--b:#f1f3ee;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;min-width:38px;border-radius:12px;background:var(--b);color:var(--c)}
+.cat-icon svg{width:21px;height:21px}
+.cat-icon.small{width:24px;height:24px;min-width:24px;border-radius:8px;margin-right:8px;vertical-align:middle}
+.cat-icon.small svg{width:15px;height:15px}
+.cat-icon.row{grid-row:span 2}
+.cat-icon.personal{box-shadow:inset 0 0 0 1.5px #f3c6d3}
+.cat-food{--c:#4c7a37;--b:#e9f3e2}
+.cat-house{--c:#2f6185;--b:#e6f0f7}
+.cat-bills{--c:#a56a07;--b:#fcf1dc}
+.cat-transport{--c:#4b5a8a;--b:#ebedf7}
+.cat-fun{--c:#8a4f9e;--b:#f4ebf7}
+.cat-health{--c:#b4434f;--b:#fbe9eb}
+.cat-clean{--c:#1f7a78;--b:#e2f4f2}
+.cat-other{--c:#6f7d72;--b:#f1f3ee}
+.category-row>span{display:flex;align-items:center}
+.group-label{display:flex;align-items:center;gap:2px}
+.cat-picker{border:0;padding:0;margin:0 0 17px}
+.cat-picker legend{font-size:11px;font-weight:600;color:#78896f;margin-bottom:8px;padding:0}
+.cat-options{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.cat-option{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px 9px;border:1px solid #dfe5d9;border-radius:12px;background:#fbfcf9;font-size:11px;color:#55665a;cursor:pointer;text-align:center;transition:border-color .15s,background .15s}
+.cat-option input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.cat-option:has(input:checked){border-color:var(--green);background:var(--green-light);color:var(--green);font-weight:600}
+.cat-option:has(input:focus-visible){outline:2px solid #cee0c5;outline-offset:1px}
+
+/* ---- Hora en recordatorios ---- */
+.time-hint{display:flex;align-items:center;gap:6px;margin:30px 0 17px}
+.time-hint .icon{width:15px;height:15px;min-width:15px}
+
+/* ---- Reautenticación sin perder lo que estabas haciendo ---- */
+#reauth{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;background:#1d2e2a66;backdrop-filter:blur(3px)}
+.reauth-card{background:var(--paper);border-radius:var(--radius);padding:26px 22px;max-width:360px;width:100%;box-shadow:0 18px 50px #0003;text-align:center}
+.reauth-card h2{margin:0 0 8px;font-size:19px}
+.reauth-card p{color:var(--muted);font-size:13px;margin:0 0 18px}
+.reauth-card #google-button{display:flex;justify-content:center;min-height:44px}
+
+/* ---- Avisos ---- */
+.push-panel h2{display:flex;align-items:center;gap:8px}
+.push-state{display:flex;flex-direction:column;gap:3px;border-radius:12px;padding:12px 14px;background:#f5f7f1;margin:12px 0 4px}
+.push-state small{color:var(--muted)}
+.push-state.on{background:var(--green-light)}
+.push-state.on strong{color:var(--green)}
+.push-state.denied,.push-state.unsupported{background:#fbeef0}
