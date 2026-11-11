@@ -88,26 +88,43 @@
 .remind-option:has(input:checked) span::before{content:'✓ '}
 .remind-option:has(input:focus-visible){outline:2px solid #cee0c5;outline-offset:1px}
 
-/* ---- Cuentas del mes ---- */
-.month-accounts{margin-bottom:24px}
-.owe-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-.owe-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fbfcf9;display:flex;flex-direction:column;gap:6px;min-width:0}
-.owe-who{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
-.owe-who .avatar{width:26px;height:26px}
-.owe-card>strong{font-size:22px;color:var(--ink)}
-.owe-detail summary{cursor:pointer;font-size:12px;color:var(--green);font-weight:600;padding:4px 0}
-.owe-item{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid #f0f1eb;font-size:12px}
-.owe-item span{display:flex;flex-direction:column;min-width:0}
-.owe-item small{color:var(--muted);font-size:11px}
-.owe-item b{white-space:nowrap;font-weight:600}
-.owe-paid{margin:12px 0 0}
-.owe-result{margin-top:14px;padding:14px 16px;border-radius:14px;background:var(--green-light);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.owe-result span{font-size:12px;color:var(--muted);width:100%}
-.owe-result strong{font-size:17px;color:var(--green)}
-.owe-result .btn{margin:0}
-.owe-result.even{background:#f5f7f1}
-@media (max-width:640px){.owe-grid{grid-template-columns:1fr}}
-
+/* ---- ¿Quién debe a quién? ---- */
+.debt-summary{margin-bottom:24px}
+.debt-summary .panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.debt-month{font-size:12px;font-weight:600;color:var(--green);background:var(--green-light);padding:4px 12px;border-radius:999px;text-transform:capitalize}
+.debt-hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:22px 14px 20px;margin:14px 0 6px;border-radius:18px;background:linear-gradient(180deg,#fdf3e3,#fbf8f1);border:1px solid #f2e5cb}
+.debt-hero.even{background:linear-gradient(180deg,var(--green-light),#f6f9f3);border-color:#dfe9da}
+.debt-faces{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.debt-faces .avatar.large{width:64px;height:64px}
+.debt-arrow{display:flex;flex-direction:column;align-items:center;color:#c8862a;min-width:110px}
+.debt-arrow b{font-size:15px;color:#9a6110;margin-bottom:-2px}
+.debt-arrow svg{width:110px;height:24px}
+.debt-heart{font-size:30px;color:#d0587a}
+.debt-hero strong{font-size:21px;line-height:1.25;color:var(--ink)}
+.debt-hero small{font-size:13px;color:var(--muted)}
+.debt-math{margin-top:16px;border:1px dashed #d9ddd2;border-radius:16px;padding:6px 14px 4px;background:#fdfdfb}
+.debt-math h3{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#8e9a85;margin:10px 0 2px}
+.debt-line{display:grid;grid-template-columns:22px 30px 1fr auto;align-items:start;gap:10px;padding:12px 0;border-bottom:1px solid #eef0e8}
+.debt-line .avatar{width:30px;height:30px}
+.debt-sign{font-size:20px;font-weight:700;color:#8e9a85;line-height:30px;text-align:center}
+.debt-text{min-width:0;display:flex;flex-direction:column;gap:2px;padding-top:5px}
+.debt-text>span{font-size:14px;font-weight:600;color:var(--ink)}
+.debt-line>b{font-size:16px;padding-top:4px;white-space:nowrap}
+.debt-line.paid .debt-text>span{color:var(--green)}
+.debt-why-wrap{grid-column:3/-1;margin-top:-6px}
+.debt-why summary{cursor:pointer;font-size:12px;color:var(--green);font-weight:600;padding:2px 0;list-style:none}
+.debt-why summary::before{content:'▸ '}
+.debt-why[open] summary::before{content:'▾ '}
+.debt-why-item{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-top:1px solid #f0f1eb;font-size:12px}
+.debt-why-item span{display:flex;flex-direction:column;min-width:0}
+.debt-why-item small{color:var(--muted);font-size:11px}
+.debt-why-item b{white-space:nowrap;font-weight:600}
+.debt-total{display:grid;grid-template-columns:22px 1fr auto;align-items:center;gap:10px;padding:14px 0 12px}
+.debt-total>span{font-size:22px;font-weight:700;color:var(--green);text-align:center}
+.debt-total>div{font-size:15px;font-weight:700;color:var(--green)}
+.debt-total>b{font-size:20px;color:var(--green)}
+.debt-pay{width:100%;margin-top:14px}
+.debt-rule{margin:12px 0 0;text-align:center}
 /* ---- Termómetros de lo pagado ---- */
 .thermo-panel{margin-bottom:24px}
 .thermo-panel .panel-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
