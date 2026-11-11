@@ -87,3 +87,23 @@
 .remind-option:has(input:checked){border-color:var(--green);background:var(--green-light);color:var(--green);font-weight:600}
 .remind-option:has(input:checked) span::before{content:'✓ '}
 .remind-option:has(input:focus-visible){outline:2px solid #cee0c5;outline-offset:1px}
+
+/* ---- Cuentas del mes ---- */
+.month-accounts{margin-bottom:24px}
+.owe-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.owe-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fbfcf9;display:flex;flex-direction:column;gap:6px;min-width:0}
+.owe-who{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.owe-who .avatar{width:26px;height:26px}
+.owe-card>strong{font-size:22px;color:var(--ink)}
+.owe-detail summary{cursor:pointer;font-size:12px;color:var(--green);font-weight:600;padding:4px 0}
+.owe-item{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid #f0f1eb;font-size:12px}
+.owe-item span{display:flex;flex-direction:column;min-width:0}
+.owe-item small{color:var(--muted);font-size:11px}
+.owe-item b{white-space:nowrap;font-weight:600}
+.owe-paid{margin:12px 0 0}
+.owe-result{margin-top:14px;padding:14px 16px;border-radius:14px;background:var(--green-light);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.owe-result span{font-size:12px;color:var(--muted);width:100%}
+.owe-result strong{font-size:17px;color:var(--green)}
+.owe-result .btn{margin:0}
+.owe-result.even{background:#f5f7f1}
+@media (max-width:640px){.owe-grid{grid-template-columns:1fr}}
