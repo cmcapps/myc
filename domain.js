@@ -14,6 +14,11 @@ export function validDate(value, optional = false) {
   if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value) || value < '2000-01-01' || value > '2100-12-31' || !Number.isFinite(new Date(value+'T12:00:00Z').getTime()) || new Date(value+'T12:00:00Z').toISOString().slice(0,10) !== value) fail('Fecha no válida.');
   return value;
 }
+export function validTime(value, optional = false) {
+  if (optional && (value === '' || value === undefined || value === null)) return '';
+  if (typeof value !== 'string' || !/^([01]\d|2[0-3]):[0-5]\d$/.test(value)) fail('Hora no válida.');
+  return value;
+}
 export function cents(value) {
   const v = String(value).trim().replace(',', '.');
   if (!/^\d{1,7}(\.\d{1,2})?$/.test(v)) fail('Introduce un importe positivo con un máximo de dos decimales.');
@@ -31,7 +36,7 @@ export function validateRecord(table, input) {
   if (!TABLES.includes(table) || !input || typeof input !== 'object') fail('Registro no válido.');
   switch (table) {
     case 'expenses': { const purpose=oneOf(input.purpose,['household','Carlos','María']); return {purpose, store:oneOf(input.store,STORES), title:text(input.title), amount:integer(input.amount,1,100000000), date:validDate(input.date), paidBy:oneOf(input.paidBy,PEOPLE), category:oneOf(input.category,CATEGORIES), carlosPercent:purpose==='Carlos'?100:purpose==='María'?0:integer(input.carlosPercent,0,100), notes:text(input.notes || '',1000,true)}; }
-    case 'tasks': return {title:text(input.title), assignedTo:oneOf(input.assignedTo,[...PEOPLE,'Ambos']), due:validDate(input.due || '',true), recurrence:oneOf(input.recurrence,['none','daily','weekly','monthly']), done:!!input.done, notes:text(input.notes || '',1000,true)};
+    case 'tasks': return {title:text(input.title), assignedTo:oneOf(input.assignedTo,[...PEOPLE,'Ambos']), due:validDate(input.due || '',true), time:input.due?validTime(input.time || '',true):'', recurrence:oneOf(input.recurrence,['none','daily','weekly','monthly']), done:!!input.done, notes:text(input.notes || '',1000,true)};
     case 'shopping': return {title:text(input.title,100), quantity:text(input.quantity || '1',40), category:oneOf(input.category,['Alimentación','Limpieza','Otros']), checked:!!input.checked};
     case 'messages': return {title:text(input.title,120), body:text(input.body,2000), to:oneOf(input.to,[...PEOPLE,'Ambos']), resolved:!!input.resolved};
     case 'settlements': return {from:oneOf(input.from,PEOPLE), amount:integer(input.amount,1,100000000), date:validDate(input.date), notes:text(input.notes || '',1000,true)};
