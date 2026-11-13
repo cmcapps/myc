@@ -1,5 +1,5 @@
-import {CONFIG} from './config.js?v=a86d8ef6b64a';
-import {emptyState,validateRecord,nextDate,today} from './domain.js?v=a86d8ef6b64a';
+import {CONFIG} from './config.js?v=fa9d7abf8fc7';
+import {emptyState,validateRecord,nextDate,today} from './domain.js?v=fa9d7abf8fc7';
 const DEMO_KEY='myc-demo-v2';
 const SESSION_KEY='myc-session-v1';
 export class ApiError extends Error {constructor(message,code){super(message);this.code=code;}}
