@@ -221,6 +221,23 @@ async function pushAction(env, actor, action, payload) {
   }
 }
 
+// ---------- aviso al otro cuando se añade un recordatorio o un mensaje ----------
+async function avisoNuevo(env, actor, p, data) {
+  if (!env.MYC_KV || !p || p.kind !== 'save' || Number(p.expectedVersion) !== 0 || data?.duplicate) return;
+  if (!['tasks', 'messages'].includes(p.table)) return;
+  const r = data?.record || p.record || {};
+  const otro = actor.name === 'Carlos' ? 'María' : 'Carlos';
+  if (p.table === 'tasks') {
+    const [y, m, d] = String(r.due || '').split('-');
+    const cuando = r.due ? ` · ${Number(d)}/${Number(m)}` + (r.time ? ' a las ' + r.time : '') : '';
+    const para = r.assignedTo === 'Ambos' ? 'para los dos' : r.assignedTo === otro ? 'para ti' : 'para ' + actor.name;
+    await notify(env, otro, { title: `🔔 ${actor.name} ha añadido un recordatorio`, body: `${r.title || 'Nuevo recordatorio'}${cuando} · ${para}`, tag: `myc-nuevo-${r.id || p.id}`, url: './?section=tasks' });
+  } else {
+    if (r.to === actor.name) return; // una nota para uno mismo no avisa al otro
+    await notify(env, otro, { title: `💌 ${actor.name} te ha dejado un mensaje`, body: (r.title || '') + (r.body ? ' · ' + String(r.body).slice(0, 90) : ''), tag: `myc-msg-${r.id || p.id}`, url: './?section=messages' });
+  }
+}
+
 // ---------- recordatorios (cron) ----------
 function madridParts(ms) {
   const p = Object.fromEntries(new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Madrid', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).formatToParts(new Date(ms)).map(x => [x.type, x.value]));
@@ -296,6 +313,7 @@ async function handle(request, env) {
     if (action.startsWith('push-')) return respond({ ok: true, data: await pushAction(env, actor, action, input.payload || {}), user: actor.name, ...(session ? { session } : {}) });
 
     const data = await callScript(env, actor, action === 'login' ? 'snapshot' : action, input.payload || {});
+    if (action === 'mutate') { try { await avisoNuevo(env, actor, input.payload, data); } catch (e) { console.error('Aviso nuevo:', e?.message || e); } }
     if (action === 'receipt') {
       if (data?.mime !== 'image/jpeg' || typeof data.base64 !== 'string' || data.base64.length > 135e4) throw new HttpError(502, 'Ticket no válido.');
       const bytes = Uint8Array.from(atob(data.base64), c => c.charCodeAt(0));
